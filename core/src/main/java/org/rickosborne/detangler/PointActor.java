@@ -12,10 +12,10 @@ import java.util.function.BiConsumer;
 
 public class PointActor extends Actor {
     private final List<EdgeActor> edgeActors;
-    private final ShapeRenderer shapeRenderer;
     public final int pointIndex;
+    private final ShapeRenderer shapeRenderer;
+    private final Theme theme;
     private boolean touched = false;
-    private Theme theme;
 
     public PointActor(
         final IntPoint point,
@@ -62,10 +62,6 @@ public class PointActor extends Actor {
         });
     }
 
-    public void setTheme(final Theme theme) {
-        this.theme = theme;
-    }
-
     @Override
     public void draw(final Batch batch, final float parentAlpha) {
         batch.end();
@@ -91,6 +87,7 @@ public class PointActor extends Actor {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public void onMoved(final IntPoint before, final IntPoint after) {
         setX(after.x);
         setY(after.y);

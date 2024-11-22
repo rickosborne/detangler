@@ -33,6 +33,7 @@ android {
   defaultConfig {
     applicationId 'org.rickosborne.detangler'
     minSdkVersion 19
+    //noinspection OldTargetApi
     targetSdkVersion 34
     versionCode 1
     versionName "2024.11.22"

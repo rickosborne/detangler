@@ -11,6 +11,7 @@ public class Lwjgl3Launcher {
         createApplication();
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private static Lwjgl3Application createApplication() {
         return new Lwjgl3Application(new DetanglerMain(), getDefaultConfiguration());
     }

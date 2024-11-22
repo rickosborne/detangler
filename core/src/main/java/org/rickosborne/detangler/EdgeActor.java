@@ -13,7 +13,7 @@ public class EdgeActor extends Actor {
     public final int edgeIndex;
     private int intersectionCount = 0;
     private final ShapeRenderer shapeRenderer;
-    private Theme theme;
+    private final Theme theme;
     public boolean touched = false;
 
     public EdgeActor(
@@ -57,9 +57,5 @@ public class EdgeActor extends Actor {
 
     public void setIntersectionCount(final int intersectionCount) {
         this.intersectionCount = intersectionCount;
-    }
-
-    public void setTheme(final Theme theme) {
-        this.theme = theme;
     }
 }

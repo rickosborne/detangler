@@ -16,6 +16,7 @@
 
 package org.rickosborne.detangler.lwjgl3;
 
+import java.nio.file.FileSystems;
 import org.lwjgl.system.macosx.LibC;
 
 import java.io.BufferedReader;
@@ -100,7 +101,7 @@ public class StartupHelper {
 
         // Restart the JVM with -XstartOnFirstThread
         ArrayList<String> jvmArgs = new ArrayList<>();
-        String separator = System.getProperty("file.separator");
+        String separator = FileSystems.getDefault().getSeparator();
         // The following line is used assuming you target Java 8, the minimum for LWJGL3.
         String javaExecPath = System.getProperty("java.home") + separator + "bin" + separator + "java";
         // If targeting Java 9 or higher, you could use the following instead of the above line:
@@ -149,6 +150,7 @@ public class StartupHelper {
             }
         } catch (Exception e) {
             System.err.println("There was a problem restarting the JVM");
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
         }
 

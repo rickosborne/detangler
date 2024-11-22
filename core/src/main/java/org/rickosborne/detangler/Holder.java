@@ -14,10 +14,4 @@ public class Holder<T> {
             consumer.accept(value);
         }
     }
-
-    public static <T> Holder<T> of(final T value) {
-        final Holder<T> holder = new Holder<>();
-        holder.setValue(value);
-        return holder;
-    }
 }

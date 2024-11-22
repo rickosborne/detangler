@@ -63,21 +63,16 @@ public class DetanglerMain extends ApplicationAdapter {
     private void startGame() {
         final EdgeActor[] edgeActors;
         final Holder<EdgeActor[]> edgeActorsHolder = new Holder<>();
-        final Holder<PointActor[]> pointActorsHolder = new Holder<>();
         final Holder<DetanglerGame> gameHolder = new Holder<>();
         final int width = Gdx.graphics.getWidth();
         final int height = Gdx.graphics.getHeight();
         final Theme theme = Theme.random();
-        final DetanglerGame game = new DetanglerGame(pointCount, width, height, (edgeIndex1, edgeIndex2, intersecting) -> {
-            edgeActorsHolder.withValue((ea) -> {
-                gameHolder.withValue((g) -> {
-                    final EdgeActor edgeActor1 = ea[edgeIndex1];
-                    edgeActor1.setIntersectionCount(g.intersectionCountForEdge(edgeIndex1));
-                    final EdgeActor edgeActor2 = ea[edgeIndex2];
-                    edgeActor2.setIntersectionCount(g.intersectionCountForEdge(edgeIndex2));
-                });
-            });
-        });
+        final DetanglerGame game = new DetanglerGame(pointCount, width, height, (edgeIndex1, edgeIndex2, intersecting) -> edgeActorsHolder.withValue((ea) -> gameHolder.withValue((g) -> {
+            final EdgeActor edgeActor1 = ea[edgeIndex1];
+            edgeActor1.setIntersectionCount(g.intersectionCountForEdge(edgeIndex1));
+            final EdgeActor edgeActor2 = ea[edgeIndex2];
+            edgeActor2.setIntersectionCount(g.intersectionCountForEdge(edgeIndex2));
+        })));
         gameHolder.setValue(game);
         this.game = game;
         if (stage != null) {
@@ -128,9 +123,7 @@ public class DetanglerMain extends ApplicationAdapter {
             final IntPoint point = points[i];
             final int pointIndex = i;
             final List<EdgeActor> edgeActorsForPoint = edgeActorsByPointIndex.getOrDefault(i, Collections.emptyList());
-            stage.addActor(new PointActor(point, i, pointWidth, shapeRenderer, edgeActorsForPoint, theme, (before, after) -> {
-                game.onPointMoved(pointIndex, before, after);
-            }));
+            stage.addActor(new PointActor(point, i, pointWidth, shapeRenderer, edgeActorsForPoint, theme, (before, after) -> game.onPointMoved(pointIndex, before, after)));
         }
         Gdx.graphics.requestRendering();
     }
